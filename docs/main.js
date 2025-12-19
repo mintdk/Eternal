@@ -1,3 +1,5 @@
+console.log("main.js loaded");
+
 const firebaseConfig = {
   apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
   authDomain: "eternal-e48c8.firebaseapp.com",
@@ -11,7 +13,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+console.log("Firebase initialized");
+
 async function generateLink(type) {
+  console.log("Generate link clicked");
+
   const name1 = document.getElementById("name1").value.trim();
   const name2 = document.getElementById("name2").value.trim();
   const date = document.getElementById("date").value.trim();
@@ -24,87 +30,37 @@ async function generateLink(type) {
 
   try {
     const docRef = await db.collection("proposals").add({
-      type: type,
-      name1: name1,
-      name2: name2,
-      date: date,
-      message: message,
+      type,
+      name1,
+      name2,
+      date,
+      message,
+      status: "pending",
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    const link = `${window.location.origin}/proposal.html?id=${docRef.id}`;
+    const link = `${window.location.origin}${window.location.pathname.replace(/\/[^\/]+$/, '')}/proposal.html?id=${docRef.id}`;
 
     document.getElementById("proposalLink").value = link;
-    document.getElementById("linkBox").style.display = "block";
+    document.getElementById("linkBox").style.display = "flex";
+
+    console.log("Proposal saved:", docRef.id);
+
   } catch (error) {
-    console.error("Error saving proposal:", error);
-    alert("Error saving proposal");
+    console.error("Firestore error:", error);
+    alert("Error saving proposal. Check console.");
   }
 }
 
 function copyLink() {
   const input = document.getElementById("proposalLink");
   input.select();
-  document.execCommand("copy");
-  alert("Link copied!");
+  navigator.clipboard.writeText(input.value);
+  alert("Link copied 💖");
 }
 
 function openProposal() {
   const link = document.getElementById("proposalLink").value;
+  if (!link) return;
   window.open(link, "_blank");
 }
-async function loadProposal() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  if (!id) return;
-
-  try {
-    const doc = await db.collection("proposals").doc(id).get();
-    if (!doc.exists) return;
-
-    const data = doc.data();
-
-    document.getElementById("proposalMessage").innerText = data.message || "";
-    document.getElementById("from-name").innerText = data.name1;
-    document.getElementById("to-name").innerText = data.name2;
-    document.getElementById("the-date").innerText = data.date;
-  } catch (err) {
-    console.error("Error loading proposal:", err);
-  }
-}
-
-async function acceptProposal() {
-  const id = new URLSearchParams(window.location.search).get("id");
-  if (!id) return;
-
-  try {
-    await db.collection("proposals").doc(id).update({
-      status: "accepted"
-    });
-
-    window.location.href = `certificate.html?id=${id}`;
-  } catch (err) {
-    console.error("Accept error:", err);
-  }
-}
-
-async function rejectProposal() {
-  const id = new URLSearchParams(window.location.search).get("id");
-  if (!id) return;
-
-  try {
-    await db.collection("proposals").doc(id).update({
-      status: "rejected"
-    });
-
-    window.location.href = "no.html";
-  } catch (err) {
-    console.error("Reject error:", err);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("proposalMessage")) {
-    loadProposal();
-  }
-});
