@@ -168,8 +168,10 @@ footer,
 }
 
 .certificate-box {
-    width: 96%;
+    width: 1100px;
+    min-width: 1100px;
     max-width: 1100px;
+
     min-height: 420px;
 
     background: linear-gradient(135deg, #fff1f7, #fff8dc);
@@ -185,9 +187,8 @@ footer,
     gap: 22px;
 
     position: relative;
-    border: 6px solid #d4af37; 
+    border: 6px solid #d4af37;
 }
-
 .certificate-box::before,
 .certificate-box::after {
     content: "";
@@ -257,11 +258,6 @@ footer,
     color: #777;
 }
 
-@media (max-width: 700px) {
-    .certificate-box {
-        padding: 30px 26px;
-    }
-
     .certificate-seal {
         width: 70px;
         height: 70px;
@@ -272,4 +268,32 @@ footer,
         width: 120px;
     }
 }
+@media (max-width: 600px) {
 
+    .main-container button,
+    .button-send,
+    .menu-btn {
+        margin-top: 12px;
+    }
+
+}
+
+
+@media (max-width: 1200px) {
+    .certificate-box {
+        transform: scale(0.9);
+        transform-origin: top center;
+    }
+}
+
+@media (max-width: 800px) {
+    .certificate-box {
+        transform: scale(0.75);
+    }
+}
+
+@media (max-width: 500px) {
+    .certificate-box {
+        transform: scale(0.65);
+    }
+}
