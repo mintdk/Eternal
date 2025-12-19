@@ -1,3 +1,4 @@
+console.log("Eternally loaded");
 const firebaseConfig = {
   apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
   authDomain: "eternal-e48c8.firebaseapp.com",
@@ -12,109 +13,135 @@ const db = firebase.firestore();
 
 console.log("🔥 Firebase connected");
 
-console.log("Eternally loaded");
+async function generateLink(type) {
+  const name1 = document.getElementById("name1").value.trim();
+  const name2 = document.getElementById("name2").value.trim();
+  const date = document.getElementById("date").value.trim();
+  const messageEl = document.getElementById("message");
+  const message = messageEl ? messageEl.value.trim() : "";
 
-function generateLink(type) {
-    const name1 = document.getElementById("name1").value.trim();
-    const name2 = document.getElementById("name2").value.trim();
-    const date  = document.getElementById("date").value.trim();
-    const messageEl = document.getElementById("message");
-    const message = messageEl ? messageEl.value.trim() : "";
+  if (!name1 || !name2 || !date) {
+    alert("Please fill in all fields");
+    return;
+  }
 
-    if (!name1 || !name2 || !date || !message) {
-        alert("Please fill in all fields.");
-        return;
-    }
+  try {
+    const docRef = await db.collection("proposals").add({
+      name1,
+      name2,
+      date,
+      message,
+      type,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
 
-    const data = { name1, name2, date, message, type };
-    localStorage.setItem("eternally_proposal", JSON.stringify(data));
-
-    const basePath = window.location.href.replace(/\/[^\/]*$/, '');
-    const link = `${basePath}/proposal.html`;
+    const link = `${window.location.origin}${window.location.pathname.replace(/\/[^\/]+$/, '')}/proposal.html?id=${docRef.id}`;
 
     document.getElementById("proposalLink").value = link;
     document.getElementById("linkBox").style.display = "flex";
+
+  } catch (err) {
+    console.error(err);
+    alert("Error creating proposal");
+  }
 }
+
 function copyLink() {
-    const input = document.getElementById("proposalLink");
-    input.select();
-    navigator.clipboard.writeText(input.value);
-    alert("Link copied 💖");
+  const input = document.getElementById("proposalLink");
+  input.select();
+  input.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(input.value);
+  alert("Link copied 💖");
 }
 
 function openProposal() {
-    const link = document.getElementById("proposalLink").value;
-    if (!link) {
-        alert("Generate the link first");
-        return;
-    }
-    window.open(link, "_blank");
+  const link = document.getElementById("proposalLink").value;
+  if (!link) {
+    alert("Generate the link first");
+    return;
+  }
+  window.open(link, "_blank");
 }
+async function initProposal() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (!id) return;
 
-function initProposal() {
-    const raw = localStorage.getItem("eternally_proposal");
-    if (!raw) return;
+  try {
+    const doc = await db.collection("proposals").doc(id).get();
+    if (!doc.exists) return;
 
-    const data = JSON.parse(raw);
+    const data = doc.data();
 
     const titles = {
-        bestfriends: "Best Friends Proposal",
-        friendship: "Friendship Proposal",
-        confession: "Confession",
-        engagement: "Engagement Proposal",
-        rlts: "Relationship Proposal"
+      bestfriends: "Best Friends Proposal",
+      friendship: "Friendship Proposal",
+      confession: "Confession",
+      engagement: "Engagement Proposal",
+      rlts: "Relationship Proposal"
     };
 
     document.getElementById("proposalTitle").innerText =
-        titles[data.type] || "Proposal";
+      titles[data.type] || "Proposal";
 
-    document.getElementById("proposalMessage").innerText = data.message;
+    document.getElementById("proposalMessage").innerText = data.message || "";
     document.getElementById("from-name").innerText = data.name1;
     document.getElementById("to-name").innerText = data.name2;
     document.getElementById("the-date").innerText = data.date;
+
+    window.currentProposalId = id;
+
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function acceptProposal() {
-    window.location.href = "certificate.html";
+  if (!window.currentProposalId) return;
+  window.location.href = `certificate.html?id=${window.currentProposalId}`;
 }
 
 function rejectProposal() {
-    window.location.href = "no.html";
+  window.location.href = "no.html";
 }
 
-function loadCertificateData() {
-    const raw = localStorage.getItem("eternally_proposal");
-    if (!raw) return;
+async function loadCertificateData() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (!id) return;
 
-    const data = JSON.parse(raw);
+  try {
+    const doc = await db.collection("proposals").doc(id).get();
+    if (!doc.exists) return;
 
-    const n1 = document.getElementById("certName1");
-    const n2 = document.getElementById("certName2");
-    const d  = document.getElementById("certDate");
+    const data = doc.data();
 
-    if (n1) n1.innerText = data.name1;
-    if (n2) n2.innerText = data.name2;
-    if (d)  d.innerText  = data.date;
+    document.getElementById("certName1").innerText = data.name1;
+    document.getElementById("certName2").innerText = data.name2;
+    document.getElementById("certDate").innerText = data.date;
+
+  } catch (err) {
+    console.error(err);
+  }
 }
-
 function saveCertificateImage() {
-    const cert = document.querySelector(".certificate-box");
-    if (!cert) return;
+  const cert = document.querySelector(".certificate-box");
+  if (!cert) return;
 
-    html2canvas(cert, { scale: 2 }).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "certificate.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-    });
+  html2canvas(cert, { scale: 2 }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "certificate.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("proposalTitle")) {
-        initProposal();
-    }
-    if (document.getElementById("certName1")) {
-        loadCertificateData();
-    }
-});
+  if (document.getElementById("proposalTitle")) {
+    initProposal();
+  }
 
+  if (document.getElementById("certName1")) {
+    loadCertificateData();
+  }
+});
