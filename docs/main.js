@@ -1,3 +1,17 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
+  authDomain: "eternal-e48c8.firebaseapp.com",
+  projectId: "eternal-e48c8",
+  storageBucket: "eternal-e48c8.firebasestorage.app",
+  messagingSenderId: "284085087396",
+  appId: "1:284085087396:web:0f7606e15a1a56ac4bca31"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+console.log("🔥 Firebase connected");
+
 console.log("Eternally loaded");
 
 function generateLink(type) {
@@ -103,3 +117,4 @@ document.addEventListener("DOMContentLoaded", () => {
         loadCertificateData();
     }
 });
+
