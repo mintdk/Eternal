@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+/* =========================
+   RESET & BASE
+========================= */
 * {
     box-sizing: border-box;
     font-family: 'Poppins', system-ui, sans-serif;
@@ -15,6 +18,9 @@ body {
     color: #555;
 }
 
+/* =========================
+   HEADER (SOLO INDEX)
+========================= */
 .header {
     background-color: #ffd6e8;
     padding: 16px 22px;
@@ -38,14 +44,23 @@ body {
     margin: 0;
 }
 
+/* =========================
+   MAIN LAYOUT
+========================= */
 main {
     min-height: calc(100vh - 120px);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 24px;
+
+    /* necesario para certificate en mobile */
+    overflow-x: auto;
 }
 
+/* =========================
+   CARD / BOX GENERAL
+========================= */
 .main-container {
     width: 92%;
     max-width: 560px;
@@ -60,6 +75,9 @@ main {
     text-align: center;
 }
 
+/* =========================
+   TITLES
+========================= */
 .page-title,
 .subtitle {
     color: #c9a23f;
@@ -67,6 +85,9 @@ main {
     margin: 0;
 }
 
+/* =========================
+   INPUTS
+========================= */
 input,
 textarea {
     width: 100%;
@@ -88,6 +109,9 @@ textarea::placeholder {
     color: #999;
 }
 
+/* =========================
+   BUTTONS (GLOBAL)
+========================= */
 .button-send,
 .menu-btn,
 .copy-btn,
@@ -114,6 +138,23 @@ textarea::placeholder {
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
+/* =========================
+   INDEX BUTTONS (VERTICAL)
+========================= */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.button-container .menu-btn {
+    width: 100%;
+}
+
+/* =========================
+   LINK BOX
+========================= */
 .link-box {
     background: #fff0f7;
     padding: 16px;
@@ -137,6 +178,9 @@ textarea::placeholder {
     color: white;
 }
 
+/* =========================
+   FOOTER
+========================= */
 footer,
 .credit {
     text-align: center;
@@ -149,6 +193,9 @@ footer,
     text-decoration: none;
 }
 
+/* =========================
+   CLOUD FLOAT
+========================= */
 .cloud-link {
     position: fixed;
     bottom: 18px;
@@ -167,17 +214,19 @@ footer,
     100% { transform: translateY(0); }
 }
 
+/* =========================
+   CERTIFICATE
+========================= */
 .certificate-box {
     width: 1100px;
     min-width: 1100px;
-    max-width: 1100px;
-
     min-height: 420px;
 
     background: linear-gradient(135deg, #fff1f7, #fff8dc);
     padding: 50px 80px;
     border-radius: 30px;
 
+    border: 6px solid #d4af37;
     box-shadow: 0 18px 45px rgba(0,0,0,0.18);
     text-align: center;
 
@@ -187,8 +236,9 @@ footer,
     gap: 22px;
 
     position: relative;
-    border: 6px solid #d4af37;
 }
+
+/* líneas doradas */
 .certificate-box::before,
 .certificate-box::after {
     content: "";
@@ -212,6 +262,7 @@ footer,
     color: #d4af37;
 }
 
+/* texto */
 .certificate-text {
     font-size: 1.05rem;
     line-height: 1.6;
@@ -225,6 +276,14 @@ footer,
     color: #caa84d;
 }
 
+/* firma */
+.signature {
+    font-family: "Georgia", serif;
+    font-size: 2.4rem;
+    color: #d4af37;
+}
+
+/* sello DK */
 .certificate-seal {
     position: absolute;
     bottom: 28px;
@@ -247,88 +306,21 @@ footer,
     letter-spacing: 2px;
 }
 
-.signature {
-    font-family: "Georgia", serif;
-    font-size: 2.4rem;
-    color: #d4af37;
-}
-
+/* legal */
 .legal {
     font-size: 0.75rem;
     color: #777;
 }
 
-    .certificate-seal {
-        width: 70px;
-        height: 70px;
-        font-size: 1.4rem;
-    }
-
+/* =========================
+   MOBILE TWEAKS
+========================= */
+@media (max-width: 600px) {
     .floating-cloud {
         width: 120px;
     }
-}
-@media (max-width: 600px) {
-
-    .main-container button,
-    .button-send,
-    .menu-btn {
-        margin-top: 12px;
-    }
-
-}
-
-
-@media (max-width: 900px) {
-    main {
-        overflow-x: auto;
-        justify-content: flex-start;
-    }
-
-    .certificate-box {
-        width: 1100px;
-        min-width: 1100px;
-        margin: 0 auto;
-    }
-}
-
-
-
-@media (max-width: 600px) {
 
     .main-container {
-        gap: 28px;
-    }
-
-    .buttons-row {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        width: 100%;
-    }
-
-    .buttons-row a,
-    .buttons-row button {
-        width: 100%;
+        gap: 26px;
     }
 }
-
-
-    .buttons-row button,
-    .buttons-row a {
-        flex: 1;
-    }
-}
-@media (max-width: 1200px) {
-    main {
-        overflow-x: auto;
-    }
-
-    .certificate-box {
-        margin: 0 auto;
-    }
-}
-main {
-    overflow-y: hidden;
-}
-
