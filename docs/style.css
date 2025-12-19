@@ -297,3 +297,35 @@ footer,
         transform: scale(0.65);
     }
 }
+
+
+@media (max-width: 600px) {
+    .main-container {
+        gap: 28px;
+    }
+
+    .main-container .menu-btn,
+    .main-container .button-send {
+        width: 100%;
+    }
+
+    .buttons-row {
+        display: flex;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .buttons-row button,
+    .buttons-row a {
+        flex: 1;
+    }
+}
+@media (max-width: 1200px) {
+    main {
+        overflow-x: auto;
+    }
+
+    .certificate-box {
+        margin: 0 auto;
+    }
+}
