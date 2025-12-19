@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #eaf4ff;
+    background-image: url("assets/cloud.png");
+    background-repeat: repeat;
+    background-size: 320px;
+    color: #555;
+}
+
+.header {
+    background-color: #ffd6e8;
+    padding: 16px 22px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo,
+.floating-logo {
+    width: 64px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.title {
+    font-size: 1.7rem;
+    color: #c9a23f;
+    margin: 0;
+}
+
+main {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.main-container {
+    width: 92%;
+    max-width: 560px;
+    background: #ffeaf3;
+    padding: 34px 28px;
+    border-radius: 26px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    text-align: center;
+}
+
+.page-title,
+.subtitle {
+    color: #c9a23f;
+    font-size: 1.7rem;
+    margin: 0;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 18px;
+    border: none;
+    background-color: #fff0f7;
+    font-size: 1rem;
+    color: #555;
+}
+
+textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #999;
+}
+
+.button-send,
+.menu-btn,
+.copy-btn,
+.accept-btn,
+.reject-btn {
+    background-color: #ffd6e8;
+    color: #c9a23f;
+    border: none;
+    border-radius: 22px;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-send:hover,
+.menu-btn:hover,
+.copy-btn:hover,
+.accept-btn:hover,
+.reject-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.link-box {
+    background: #fff0f7;
+    padding: 16px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.link-box input {
+    background: white;
+}
+
+.link-box button:first-of-type {
+    background: linear-gradient(135deg, #ffd36e, #ffb6d5);
+    color: #5a3b00;
+}
+
+.link-box button:last-of-type {
+    background: #ff8fb3;
+    color: white;
+}
+
+footer,
+.credit {
+    text-align: center;
+    font-size: 0.85rem;
+    margin: 28px 0;
+}
+
+.credit a {
+    color: #777;
+    text-decoration: none;
+}
+
+.cloud-link {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 10;
+}
+
+.floating-cloud {
+    width: 150px;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+.certificate-box {
+    width: 96%;
+    max-width: 1100px;
+    min-height: 420px;
+
+    background: linear-gradient(135deg, #fff1f7, #fff8dc);
+    padding: 50px 80px;
+    border-radius: 30px;
+
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+
+    position: relative;
+    border: 6px solid #d4af37; 
+}
+
+.certificate-box::before,
+.certificate-box::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+    background: linear-gradient(#d4af37, transparent, #d4af37);
+}
+
+.certificate-box::before {
+    left: 22px;
+}
+
+.certificate-box::after {
+    right: 22px;
+}
+
+.certificate-box .page-title {
+    font-size: 2rem;
+    color: #d4af37;
+}
+
+.certificate-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #555;
+}
+
+.certificate-text strong {
+    font-size: 1.3rem;
+    color: #caa84d;
+}
+
+.certificate-seal {
+    position: absolute;
+    bottom: 28px;
+    right: 36px;
+
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+    background: radial-gradient(circle, #ffe9b3, #d4af37);
+    border: 4px solid #b9982e;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #5a3b00;
+    letter-spacing: 2px;
+}
+
+.signature {
+    font-family: "Georgia", serif;
+    font-size: 2.4rem;
+    color: #d4af37;
+}
+
+.legal {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+@media (max-width: 700px) {
+    .certificate-box {
+        padding: 30px 26px;
+    }
+
+    .certificate-seal {
+        width: 70px;
+        height: 70px;
+        font-size: 1.4rem;
+    }
+
+    .floating-cloud {
+        width: 120px;
+    }
+}
+

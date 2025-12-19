@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <img src="assets/logo1.png" alt="Logo" class="floating-logo">
+
+    <a href="https://mintdk.github.io/Mintdk/" class="cloud-link" target="_blank">
+        <img src="assets/mintdk.png" alt="Cloud" class="floating-cloud">
+    </a>
+
+    <main>
+        <div class="certificate-box" id="certificate">
+
+            <h2 class="page-title">Certificate of Union</h2>
+
+            <p class="certificate-text">
+                We are pleased to unite<br><br>
+
+                <strong id="certName1">—</strong>  
+                &nbsp;and&nbsp;  
+                <strong id="certName2">—</strong><br><br>
+
+                on the day<br><br>
+
+                <strong id="certDate">—</strong><br><br>
+
+                with the power granted by this page
+                to certify their relationship.
+            </p>
+
+            <div class="signature">MintDK</div>
+
+            <p class="legal">
+                This certificate has no legal validity
+            </p>
+
+        </div>
+
+        <button class="copy-btn" onclick="saveCertificateImage()">
+            Save certificate as image
+        </button>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <script src="main.js"></script>
+
+</body>
+</html>

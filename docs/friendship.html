@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friendship</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<img src="assets/logo1.png" class="floating-logo">
+<a href="https://mintdk.github.io/Mintdk/" class="cloud-link">
+<img src="assets/mintdk.png" class="floating-cloud"></a>
+
+<main>
+<div class="main-container">
+<h2 class="page-title">Dear friend</h2>
+
+<input id="name1" type="text" placeholder="First person name">
+<input id="name2" type="text" placeholder="Second person name">
+<input id="date" type="text" placeholder="DD/MM/YYYY">
+<textarea id="message" placeholder="Your friendship message"></textarea>
+
+<button class="button-send" onclick="generateLink('friendship')">Generate link</button>
+
+<div id="linkBox" class="link-box" style="display:none;">
+  <p>Your proposal link:</p>
+
+  <input type="text" id="proposalLink" readonly>
+
+ <button type="button" onclick="openProposal()">Open proposal</button>
+<button type="button" onclick="copyLink()">Copy link</button>
+
+</div>
+
+</div>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
