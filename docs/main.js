@@ -1,4 +1,3 @@
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
   authDomain: "eternal-e48c8.firebaseapp.com",
@@ -9,11 +8,9 @@ const firebaseConfig = {
   measurementId: "G-JHB9SF8FFF"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Generate proposal link
 async function generateLink(type) {
   const name1 = document.getElementById("name1").value.trim();
   const name2 = document.getElementById("name2").value.trim();
@@ -56,3 +53,58 @@ function openProposal() {
   const link = document.getElementById("proposalLink").value;
   window.open(link, "_blank");
 }
+async function loadProposal() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (!id) return;
+
+  try {
+    const doc = await db.collection("proposals").doc(id).get();
+    if (!doc.exists) return;
+
+    const data = doc.data();
+
+    document.getElementById("proposalMessage").innerText = data.message || "";
+    document.getElementById("from-name").innerText = data.name1;
+    document.getElementById("to-name").innerText = data.name2;
+    document.getElementById("the-date").innerText = data.date;
+  } catch (err) {
+    console.error("Error loading proposal:", err);
+  }
+}
+
+async function acceptProposal() {
+  const id = new URLSearchParams(window.location.search).get("id");
+  if (!id) return;
+
+  try {
+    await db.collection("proposals").doc(id).update({
+      status: "accepted"
+    });
+
+    window.location.href = `certificate.html?id=${id}`;
+  } catch (err) {
+    console.error("Accept error:", err);
+  }
+}
+
+async function rejectProposal() {
+  const id = new URLSearchParams(window.location.search).get("id");
+  if (!id) return;
+
+  try {
+    await db.collection("proposals").doc(id).update({
+      status: "rejected"
+    });
+
+    window.location.href = "no.html";
+  } catch (err) {
+    console.error("Reject error:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("proposalMessage")) {
+    loadProposal();
+  }
+});
