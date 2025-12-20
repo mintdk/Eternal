@@ -1,27 +1,27 @@
-console.log("main.js loaded");
-
+console.log("📄 main.js cargado");
 const firebaseConfig = {
   apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
   authDomain: "eternal-e48c8.firebaseapp.com",
   projectId: "eternal-e48c8",
   storageBucket: "eternal-e48c8.firebasestorage.app",
   messagingSenderId: "284085087396",
-  appId: "1:284085087396:web:0f7606e15a1a56ac4bca31",
-  measurementId: "G-JHB9SF8FFF"
+  appId: "1:284085087396:web:0f7606e15a1a56ac4bca31"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+  console.log("🔥 Firebase inicializado");
+}
+
 const db = firebase.firestore();
 
-console.log("Firebase initialized");
+window.generateLink = async function (type) {
+  console.log("🟢 generateLink()");
 
-async function generateLink(type) {
-  console.log("Generate link clicked");
-
-  const name1 = document.getElementById("name1").value.trim();
-  const name2 = document.getElementById("name2").value.trim();
-  const date = document.getElementById("date").value.trim();
-  const message = document.getElementById("message").value.trim();
+  const name1 = document.getElementById("name1")?.value.trim();
+  const name2 = document.getElementById("name2")?.value.trim();
+  const date = document.getElementById("date")?.value.trim();
+  const message = document.getElementById("message")?.value.trim();
 
   if (!name1 || !name2 || !date) {
     alert("Please fill all required fields");
@@ -39,28 +39,106 @@ async function generateLink(type) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    const link = `${window.location.origin}${window.location.pathname.replace(/\/[^\/]+$/, '')}/proposal.html?id=${docRef.id}`;
+    const basePath = location.pathname.replace(/\/[^/]*$/, "");
+    const link = `${location.origin}${basePath}/proposal.html?id=${docRef.id}`;
 
     document.getElementById("proposalLink").value = link;
-    document.getElementById("linkBox").style.display = "flex";
+    document.getElementById("linkBox").style.display = "block";
 
-    console.log("Proposal saved:", docRef.id);
-
-  } catch (error) {
-    console.error("Firestore error:", error);
-    alert("Error saving proposal. Check console.");
+    console.log("✅ Link creado:", link);
+  } catch (err) {
+    console.error("❌ Error guardando propuesta:", err);
+    alert("Error creating proposal");
   }
-}
-
-function copyLink() {
+};
+window.copyLink = function () {
   const input = document.getElementById("proposalLink");
   input.select();
-  navigator.clipboard.writeText(input.value);
-  alert("Link copied 💖");
-}
+  document.execCommand("copy");
+  alert("Link copied!");
+};
 
-function openProposal() {
+window.openProposal = function () {
   const link = document.getElementById("proposalLink").value;
-  if (!link) return;
-  window.open(link, "_blank");
-}
+  if (link) window.open(link, "_blank");
+};
+
+window.loadProposal = async function () {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) return;
+
+  try {
+    const doc = await db.collection("proposals").doc(id).get();
+    if (!doc.exists) {
+      alert("Proposal not found");
+      return;
+    }
+
+    const data = doc.data();
+
+    document.getElementById("pName1").textContent = data.name1;
+    document.getElementById("pName2").textContent = data.name2;
+    document.getElementById("pDate").textContent = data.date;
+    document.getElementById("pMessage").textContent = data.message || "";
+
+  } catch (err) {
+    console.error("❌ Error loading proposal:", err);
+  }
+};
+
+window.acceptProposal = async function () {
+  const id = new URLSearchParams(location.search).get("id");
+  if (!id) return;
+
+  await db.collection("proposals").doc(id).update({
+    status: "accepted"
+  });
+
+  window.location.href = "certificate.html?id=" + id;
+};
+
+window.rejectProposal = async function () {
+  const id = new URLSearchParams(location.search).get("id");
+  if (!id) return;
+
+  await db.collection("proposals").doc(id).update({
+    status: "rejected"
+  });
+
+  window.location.href = "no.html";
+};
+
+window.loadCertificate = async function () {
+  const id = new URLSearchParams(location.search).get("id");
+  if (!id) return;
+
+  try {
+    const doc = await db.collection("proposals").doc(id).get();
+    if (!doc.exists) return;
+
+    const data = doc.data();
+
+    document.getElementById("certName1").textContent = data.name1;
+    document.getElementById("certName2").textContent = data.name2;
+    document.getElementById("certDate").textContent = data.date;
+  } catch (err) {
+    console.error("❌ Error loading certificate:", err);
+  }
+};
+
+window.saveCertificateImage = function () {
+  const cert = document.getElementById("certificate");
+  if (!cert) return;
+
+  html2canvas(cert, {
+    scale: 2,
+    backgroundColor: null
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "certificate.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+};
