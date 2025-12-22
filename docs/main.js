@@ -1,4 +1,5 @@
 console.log("📄 main.js cargado");
+
 const firebaseConfig = {
   apiKey: "AIzaSyBjEv31mw8_zZuMmCU29jHkP5tU5HqHUPc",
   authDomain: "eternal-e48c8.firebaseapp.com",
@@ -51,6 +52,7 @@ window.generateLink = async function (type) {
     alert("Error creating proposal");
   }
 };
+
 window.copyLink = function () {
   const input = document.getElementById("proposalLink");
   input.select();
@@ -64,9 +66,7 @@ window.openProposal = function () {
 };
 
 window.loadProposal = async function () {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
+  const id = new URLSearchParams(window.location.search).get("id");
   if (!id) return;
 
   try {
@@ -78,11 +78,12 @@ window.loadProposal = async function () {
 
     const data = doc.data();
 
-    document.getElementById("pName1").textContent = data.name1;
-    document.getElementById("pName2").textContent = data.name2;
-    document.getElementById("pDate").textContent = data.date;
-    document.getElementById("pMessage").textContent = data.message || "";
+    document.getElementById("proposalMessage").textContent = data.message || "";
+    document.getElementById("from-name").textContent = data.name1;
+    document.getElementById("to-name").textContent = data.name2;
+    document.getElementById("the-date").textContent = data.date;
 
+    console.log("📄 Proposal loaded:", data);
   } catch (err) {
     console.error("❌ Error loading proposal:", err);
   }
@@ -111,7 +112,7 @@ window.rejectProposal = async function () {
 };
 
 window.loadCertificate = async function () {
-  const id = new URLSearchParams(location.search).get("id");
+  const id = new URLSearchParams(window.location.search).get("id");
   if (!id) return;
 
   try {
@@ -123,6 +124,8 @@ window.loadCertificate = async function () {
     document.getElementById("certName1").textContent = data.name1;
     document.getElementById("certName2").textContent = data.name2;
     document.getElementById("certDate").textContent = data.date;
+
+    console.log("🏆 Certificate loaded");
   } catch (err) {
     console.error("❌ Error loading certificate:", err);
   }
@@ -142,3 +145,13 @@ window.saveCertificateImage = function () {
     link.click();
   });
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (location.pathname.includes("proposal.html")) {
+    loadProposal();
+  }
+
+  if (location.pathname.includes("certificate.html")) {
+    loadCertificate();
+  }
+});
