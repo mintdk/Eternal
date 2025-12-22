@@ -147,11 +147,14 @@ window.saveCertificateImage = function () {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (location.pathname.includes("proposal.html")) {
+  if (document.getElementById("from-name")) {
     loadProposal();
   }
+});
+
 
   if (location.pathname.includes("certificate.html")) {
     loadCertificate();
   }
 });
+
