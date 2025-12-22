@@ -150,11 +150,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("from-name")) {
     loadProposal();
   }
-});
 
-
-  if (location.pathname.includes("certificate.html")) {
+  if (document.getElementById("certName1")) {
     loadCertificate();
   }
 });
+
+
 
