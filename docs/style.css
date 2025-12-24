@@ -133,111 +133,146 @@ textarea::placeholder {
   animation: float 6s ease-in-out infinite;
 }
 
-/* ====== CERTIFICATE ====== */
+/* ===== CERTIFICATE ===== */
+
+.certificate-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
 
 .certificate-box {
-  width: 1100px;
-  min-width: 1100px;
-  min-height: 480px;
+    width: 1100px;
+    min-width: 1100px;
+    height: auto;
 
-  background: linear-gradient(135deg, #fff1f7, #fff8dc);
-  padding: 50px 80px;
-  border-radius: 30px;
+    background: linear-gradient(135deg, #fff6fb, #fffdf2);
+    padding: 70px 90px;
 
-  border: 6px solid #d4af37;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-  text-align: center;
+    border-radius: 28px;
+    border: 8px solid #d4af37;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 22px;
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.18),
+        inset 0 0 0 3px #f5e6b3;
 
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    text-align: center;
+
+    position: relative;
 }
 
+/* Decorative side lines */
 .certificate-box::before,
 .certificate-box::after {
-  content: "";
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  width: 2px;
-  background: linear-gradient(#d4af37, transparent, #d4af37);
+    content: "";
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    width: 3px;
+    background: linear-gradient(#d4af37, transparent, #d4af37);
 }
 
-.certificate-box::before {
-  left: 22px;
-}
+.certificate-box::before { left: 30px; }
+.certificate-box::after { right: 30px; }
 
-.certificate-box::after {
-  right: 22px;
-}
-
-/* ====== CERTIFICATE TEXT ====== */
-
+/* Title */
 .certificate-title {
-  font-size: 2.4rem;
-  color: #d4af37;
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: #c9a23f;
+    letter-spacing: 2px;
 }
 
+/* Subtitle */
+.certificate-subtitle {
+    font-size: 1.2rem;
+    color: #8a6f2f;
+    margin-top: -10px;
+}
+
+/* Main text */
 .certificate-text {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  max-width: 900px;
-  margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #5f5f5f;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
+.certificate-text strong {
+    color: #b8942e;
+    font-size: 1.4rem;
+}
+
+/* Names */
 .certificate-names {
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #caa84d;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #c49a2c;
+    letter-spacing: 1px;
 }
 
+/* Date */
 .certificate-date {
-  font-size: 1.3rem;
-  margin-top: 8px;
+    font-size: 1rem;
+    color: #777;
+    margin-top: 8px;
 }
 
-/* ====== SIGNATURE ====== */
-
+/* Signature */
 .signature {
-  font-family: "Georgia", serif;
-  font-size: 2.5rem;
-  color: #d4af37;
+    margin-top: 20px;
+    font-family: "Georgia", serif;
+    font-size: 2.4rem;
+    color: #c9a23f;
 }
 
-/* ====== SEAL ====== */
-
-.certificate-seal {
-  position: absolute;
-  bottom: 28px;
-  right: 36px;
-
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-
-  background: radial-gradient(circle, #ffe9b3, #d4af37);
-  border: 4px solid #b9982e;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #5a3b00;
-  letter-spacing: 2px;
-}
-
-/* ====== LEGAL ====== */
-
+/* Legal text */
 .legal {
-  font-size: 0.75rem;
-  color: #777;
-  margin-top: 10px;
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 10px;
 }
+
+/* Seal */
+.certificate-seal {
+    position: absolute;
+    bottom: 36px;
+    right: 46px;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    background: radial-gradient(circle, #fff1b8, #d4af37);
+    border: 5px solid #b9982e;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+    font-weight: 600;
+    color: #5a3b00;
+    letter-spacing: 2px;
+
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .certificate-wrapper {
+        justify-content: flex-start;
+    }
+}
+
+
+
 
 /* ====== ANIMATIONS ====== */
 
@@ -258,3 +293,4 @@ textarea::placeholder {
     width: 120px;
   }
 }
+
