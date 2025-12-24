@@ -17,12 +17,19 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 
 window.generateLink = async function (type) {
-  console.log("🟢 generateLink()");
+  const name1Input = document.getElementById("name1");
+  const name2Input = document.getElementById("name2");
+  const dateInput = document.getElementById("date");
 
-  const name1 = document.getElementById("name1")?.value.trim();
-  const name2 = document.getElementById("name2")?.value.trim();
-  const date = document.getElementById("date")?.value.trim();
-  const message = document.getElementById("message")?.value.trim();
+  if (!name1Input || !name2Input || !dateInput) {
+    alert("Form not found on this page");
+    return;
+  }
+
+  const name1 = name1Input.value.trim();
+  const name2 = name2Input.value.trim();
+  const date = dateInput.value.trim();
+  const message = document.getElementById("message")?.value.trim() || "";
 
   if (!name1 || !name2 || !date) {
     alert("Please fill all required fields");
@@ -40,8 +47,7 @@ window.generateLink = async function (type) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    const basePath = location.pathname.replace(/\/[^/]*$/, "");
-    const link = `${location.origin}${basePath}/proposal.html?id=${docRef.id}`;
+    const link = `${location.origin}${location.pathname.replace(/\/[^/]*$/, "")}/proposal.html?id=${docRef.id}`;
 
     document.getElementById("proposalLink").value = link;
     document.getElementById("linkBox").style.display = "block";
@@ -155,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCertificate();
   }
 });
+
 
 
 
