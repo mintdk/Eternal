@@ -15,16 +15,11 @@ body {
   color: #555;
 }
 
-/* ====== HEADER / LOGOS ====== */
-
 .logo,
 .floating-logo {
   width: 64px;
   animation: float 4s ease-in-out infinite;
 }
-
-/* ====== MAIN LAYOUT ====== */
-
 main {
   min-height: 100vh;
   display: flex;
@@ -48,15 +43,11 @@ main {
   text-align: center;
 }
 
-/* ====== TITLES ====== */
-
 .page-title {
   color: #c9a23f;
   font-size: 1.7rem;
   margin: 0;
 }
-
-/* ====== INPUTS ====== */
 
 input,
 textarea {
@@ -78,8 +69,6 @@ input::placeholder,
 textarea::placeholder {
   color: #999;
 }
-
-/* ====== BUTTONS ====== */
 
 .button-send,
 .copy-btn,
@@ -104,8 +93,6 @@ textarea::placeholder {
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* ====== LINK BOX ====== */
-
 .link-box {
   background: #fff0f7;
   padding: 16px;
@@ -119,8 +106,6 @@ textarea::placeholder {
   background: white;
 }
 
-/* ====== FLOATING CLOUD ====== */
-
 .cloud-link {
   position: fixed;
   bottom: 18px;
@@ -132,8 +117,7 @@ textarea::placeholder {
   width: 150px;
   animation: float 6s ease-in-out infinite;
 }
-
-/* ===== CERTIFICATE ===== */
+/
 
 .certificate-wrapper {
     width: 100%;
@@ -166,7 +150,6 @@ textarea::placeholder {
     position: relative;
 }
 
-/* Decorative side lines */
 .certificate-box::before,
 .certificate-box::after {
     content: "";
@@ -180,7 +163,6 @@ textarea::placeholder {
 .certificate-box::before { left: 30px; }
 .certificate-box::after { right: 30px; }
 
-/* Title */
 .certificate-title {
     font-size: 2.6rem;
     font-weight: 600;
@@ -188,14 +170,12 @@ textarea::placeholder {
     letter-spacing: 2px;
 }
 
-/* Subtitle */
 .certificate-subtitle {
     font-size: 1.2rem;
     color: #8a6f2f;
     margin-top: -10px;
 }
 
-/* Main text */
 .certificate-text {
     font-size: 1.15rem;
     line-height: 1.8;
@@ -209,7 +189,6 @@ textarea::placeholder {
     font-size: 1.4rem;
 }
 
-/* Names */
 .certificate-names {
     font-size: 2rem;
     font-weight: 600;
@@ -217,14 +196,12 @@ textarea::placeholder {
     letter-spacing: 1px;
 }
 
-/* Date */
 .certificate-date {
     font-size: 1rem;
     color: #777;
     margin-top: 8px;
 }
 
-/* Signature */
 .signature {
     margin-top: 20px;
     font-family: "Georgia", serif;
@@ -232,14 +209,12 @@ textarea::placeholder {
     color: #c9a23f;
 }
 
-/* Legal text */
 .legal {
     font-size: 0.75rem;
     color: #999;
     margin-top: 10px;
 }
 
-/* Seal */
 .certificate-seal {
     position: absolute;
     bottom: 36px;
@@ -264,25 +239,17 @@ textarea::placeholder {
     box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
 }
 
-/* Mobile */
 @media (max-width: 900px) {
     .certificate-wrapper {
         justify-content: flex-start;
     }
 }
 
-
-
-
-/* ====== ANIMATIONS ====== */
-
 @keyframes float {
   0% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
   100% { transform: translateY(0); }
 }
-
-/* ====== MOBILE ====== */
 
 @media (max-width: 700px) {
   .certificate-box {
@@ -292,5 +259,38 @@ textarea::placeholder {
   .floating-cloud {
     width: 120px;
   }
+}
+
+.menu-btn,
+.button-send,
+.action-btn,
+.link-box button {
+  background-color: #ffd6e8;
+  color: #c9a23f;
+  border: none;
+  border-radius: 22px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.menu-btn:hover,
+.button-send:hover,
+.action-btn:hover,
+.link-box button:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.button-container,
+.link-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
