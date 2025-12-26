@@ -2,52 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Certificate</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<main>
-  <div class="certificate-wrapper">
-    <div class="certificate-box" id="certificate">
+  <img src="assets/logo1.png" class="floating-logo">
 
-      <h1 class="certificate-title">Certificate of Union</h1>
+  <main>
+    <div class="certificate-wrapper">
+      <div class="certificate-box" id="certificate">
 
-      <p class="certificate-subtitle">
-        We are pleased to unite
-      </p>
+        <h1 class="certificate-title">Certificate of Union</h1>
 
-      <div class="certificate-names">
-        <span id="certName1">Loading...</span>
-        &nbsp;❤&nbsp;
-        <span id="certName2">Loading...</span>
-      </div>
+        <p class="certificate-subtitle">
+          We are pleased to unite
+        </p>
 
-      <p class="certificate-text">
-        This certificate is proudly presented as a symbol of commitment,
-        affection, and mutual understanding between the two individuals
-        named above. May this union be filled with respect, joy, and
-        shared dreams.
-      </p>
+        <div class="certificate-names">
+          <span id="certName1"></span>
+          &nbsp;❤&nbsp;
+          <span id="certName2"></span>
+        </div>
 
-      <p class="certificate-date">
-        Issued on <strong id="certDate">Loading...</strong>
-      </p>
-      <div class="signature">
-        MintDK
-      </div>
-      <div class="legal">
-        This certificate has no legal validity
-      </div>
-      <div class="certificate-seal">
-        ♥
+        <p class="certificate-text">
+          This certificate is proudly presented as a symbol of commitment,
+          affection, and mutual understanding between the two individuals
+          named above. May this union be filled with respect, joy, and
+          shared dreams.
+        </p>
+
+        <p class="certificate-date">
+          Issued on <span id="certDate"></span>
+        </p>
+
+        <div class="signature">
+          MintDK
+        </div>
+
+        <div class="legal">
+          This certificate has no legal validity
+        </div>
+
+        <div class="certificate-seal">
+          ♥
+        </div>
+
       </div>
     </div>
-  </div>
-</main>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="main.js"></script>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+
 </body>
 </html>
