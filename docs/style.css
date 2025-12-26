@@ -294,3 +294,41 @@ textarea::placeholder {
   gap: 14px;
 }
 
+
+main {
+  align-items: flex-start; 
+}
+
+.certificate-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.certificate-box {
+  width: 100%;
+  max-width: 900px;
+  min-width: unset;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .certificate-box {
+    padding: 20px 16px;
+    border-width: 4px;
+  }
+
+  .certificate-title {
+    font-size: 1.4rem;
+  }
+
+  .certificate-names {
+    font-size: 1.1rem;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .certificate-text {
+    font-size: 0.95rem;
+  }
+}
