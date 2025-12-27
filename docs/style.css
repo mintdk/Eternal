@@ -294,41 +294,40 @@ textarea::placeholder {
   gap: 14px;
 }
 
-
-main {
-  align-items: flex-start; 
-}
-
 .certificate-wrapper {
   width: 100%;
   overflow-x: auto;
-  padding-bottom: 20px;
+  padding: 20px 0;
 }
 
 .certificate-box {
-  width: 100%;
-  max-width: 900px;
-  min-width: unset;
+  width: 1000px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+
+  background: linear-gradient(135deg, #fff1f7, #fff8dc);
+  padding: 50px 80px;
+  border-radius: 30px;
+
+  border: 6px solid #d4af37;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .certificate-box {
-    padding: 20px 16px;
-    border-width: 4px;
+    transform: scale(0.75);
+    transform-origin: top center;
   }
+}
 
-  .certificate-title {
-    font-size: 1.4rem;
-  }
-
-  .certificate-names {
-    font-size: 1.1rem;
-    text-align: center;
-    word-break: break-word;
-  }
-
-  .certificate-text {
-    font-size: 0.95rem;
-  }
+.download-btn {
+  margin-top: 20px;
+  align-self: center;
 }
